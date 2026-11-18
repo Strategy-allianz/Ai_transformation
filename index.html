@@ -79,32 +79,40 @@ button:focus-visible{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 
 .detail-box{margin-top:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);border-left:4px solid var(--accent);border-radius:12px;padding:clamp(14px,2.2vw,22px)}
 .def{margin:0;font-size:clamp(1rem,2.2vw,1.3rem);font-weight:300;line-height:1.35}
 
-/* ---------- 3: portfolio visual ---------- */
+/* ---------- 3: portfolio table (always open, hover effects) ---------- */
 .portfolio{container-type:inline-size;margin-top:clamp(24px,3.6vw,44px)}
 .portfolio h2{margin:0 0 clamp(12px,2vw,20px);font-weight:300;font-size:clamp(1.5rem,3.2vw,2.3rem);line-height:1.15;color:var(--navy)}
-.row{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin-bottom:10px}
-.tile{display:flex;align-items:center;gap:14px;width:100%;border:0;border-radius:6px;padding:14px 16px;text-align:left;color:#fff;font-weight:700;transition:filter .2s}
-.tile:hover{filter:brightness(1.08)}
-.tile:focus-visible{outline-color:var(--navy)}
+.table{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+.rows{display:grid;gap:10px}
+.row{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+.tile{display:flex;align-items:center;gap:14px;border-radius:6px;padding:14px 16px;color:#fff;transition:filter .25s,box-shadow .25s,transform .25s var(--ease)}
 .tile .num{font-size:1.6rem;font-weight:700;line-height:1}
-.tile .tname{font-size:1.1rem;line-height:1.15}
-.tile .chev{margin-left:auto}
+.tile .tname{font-size:1.1rem;font-weight:700;line-height:1.15}
 .t1 .tile{background:#1D6F5E}
 .t2 .tile{background:#3E927B}
 .t3 .tile{background:#8FC4AB;color:var(--navy)}
-.rpanel{display:none}
-.row.open .rpanel{display:block;animation:fadein .4s var(--ease)}
-@keyframes fadein{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:8px;height:100%}
-.card{background:var(--mint);border-top:3px solid var(--teal-line);border-radius:2px;padding:14px 14px 16px;font-size:.88rem;line-height:1.45;color:var(--ink)}
-.card h3{margin:0 0 6px;font-size:1.05rem;line-height:1.2;color:var(--navy);font-weight:700}
+.row:hover .tile{filter:brightness(1.12);box-shadow:0 8px 18px rgba(15,42,92,.18)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:8px}
+.card{background:var(--mint);border-top:3px solid var(--teal-line);border-radius:2px;padding:14px 14px 16px;font-size:.88rem;line-height:1.45;color:var(--ink);transition:transform .3s var(--ease),box-shadow .3s,background .3s,border-color .3s}
+.card h3{margin:0 0 6px;font-size:1.05rem;line-height:1.2;color:var(--navy);font-weight:700;transition:color .3s}
 .card p{margin:0}
 .card strong{font-weight:700;color:var(--navy)}
-@container (min-width:640px){
-  .row.open{grid-template-columns:112px minmax(0,1fr)}
-  .row.open .tile{flex-direction:column;align-items:flex-start;justify-content:space-between;padding:16px 14px;min-height:130px}
-  .row.open .tile .tname{margin-top:auto}
-  .row.open .tile .chev{margin-left:0;align-self:flex-end}
+.card:hover{transform:translateY(-4px);background:#fff;border-top-color:#22B8A8;box-shadow:0 12px 26px rgba(15,42,92,.16)}
+.card:hover h3{color:#0B7C76}
+.partner{background:linear-gradient(180deg,#0B7C76 0%,#075F5A 100%);color:#fff;border-radius:4px;padding:18px 16px;transition:transform .3s var(--ease),box-shadow .3s,filter .3s}
+.partner h3{margin:0 0 10px;font-size:1.2rem;line-height:1.2;font-weight:700}
+.partner p{margin:0;font-size:.88rem;line-height:1.55}
+.partner strong{font-weight:700}
+.partner:hover{transform:translateY(-4px);filter:brightness(1.1);box-shadow:0 12px 26px rgba(7,95,90,.35)}
+.tile,.card,.partner{animation:rise .65s var(--ease) backwards;animation-delay:calc(var(--i) * 60ms)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@container (min-width:600px){
+  .row{grid-template-columns:112px minmax(0,1fr)}
+  .tile{flex-direction:column;align-items:flex-start;justify-content:space-between;padding:16px 14px;min-height:130px}
+  .tile .tname{margin-top:auto}
+}
+@container (min-width:860px){
+  .table{grid-template-columns:minmax(0,1fr) 190px}
 }
 
 .callout{margin-top:clamp(22px,3.4vw,40px);display:flex;gap:16px;align-items:center;background:var(--mint-strong);border-radius:12px;padding:clamp(14px,2vw,20px) clamp(14px,2.4vw,24px);color:var(--navy)}
@@ -177,21 +185,23 @@ button:focus-visible{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 
   <!-- 3 -->
   <section class="portfolio" aria-labelledby="portfolio-title">
     <h2 id="portfolio-title">The AI transformation portfolio</h2>
-    <div class="row t1">
-      <button class="tile" id="pbtn-delivery" type="button" aria-expanded="false" aria-controls="ppanel-delivery">
-        <span class="num">01</span><span class="tname">AI Delivery</span><i class="chev" aria-hidden="true"></i>
-      </button>
-      <div class="rpanel" id="ppanel-delivery" role="region" aria-labelledby="pbtn-delivery"><div class="cards"><article class="card"><h3>AI WoW</h3><p>Define and scale our <strong>AI-native IT delivery and operations model</strong>, embedding AI into processes, tooling, organization, and workforce structures to drive enterprise-wide adoption</p></article><article class="card"><h3>AI Rebuild</h3><p>Define the framework to identify <strong>AI rebuild opportunities</strong>, assess business value and feasibility, and establish the centralized execution model for <strong>rebuild initiatives</strong></p></article><article class="card"><h3>BPR for AI</h3><p>Rewire <strong>business and operational processes</strong> across all support functions through AI, so that the new processes are simpler, faster and AI-enabled by design</p></article></div></div>
-    </div><div class="row t2">
-      <button class="tile" id="pbtn-readiness" type="button" aria-expanded="false" aria-controls="ppanel-readiness">
-        <span class="num">02</span><span class="tname">AI Readiness</span><i class="chev" aria-hidden="true"></i>
-      </button>
-      <div class="rpanel" id="ppanel-readiness" role="region" aria-labelledby="pbtn-readiness"><div class="cards"><article class="card"><h3>Modernization &amp; simplification</h3><p><strong>Harmonize</strong> and <strong>simplify</strong> the OEs application and infrastructure landscape, further improve our operating model</p></article><article class="card"><h3>Operating Model</h3><p><strong>Decide what we do ourselves and what we partner for</strong> to have a resilient and future-fit organization.</p></article><article class="card"><h3>Software Pruning</h3><p><strong>Reduce software complexity and spend</strong> through license optimization, vendor rationalization, and tool consolidation</p></article></div></div>
-    </div><div class="row t3">
-      <button class="tile" id="pbtn-skills" type="button" aria-expanded="false" aria-controls="ppanel-skills">
-        <span class="num">03</span><span class="tname">AI Skills</span><i class="chev" aria-hidden="true"></i>
-      </button>
-      <div class="rpanel" id="ppanel-skills" role="region" aria-labelledby="pbtn-skills"><div class="cards"><article class="card"><h3>Right-skilling and right-sizing</h3><p>Turn AI impact into people action: <strong>close the skill gap</strong> - transform workforce capabilities and structure to support the future AI-native operating model</p></article></div></div>
+    <div class="table">
+      <div class="rows">
+      <div class="row t1">
+        <div class="tile" style="--i:1"><span class="num">01</span><span class="tname">AI Delivery</span></div>
+        <div class="cards"><article class="card" style="--i:2"><h3>AI WoW</h3><p>Define and scale our <strong>AI-native IT delivery and operations model</strong>, embedding AI into processes, tooling, organization, and workforce structures to drive enterprise-wide adoption</p></article><article class="card" style="--i:3"><h3>AI Rebuild</h3><p>Define the framework to identify <strong>AI rebuild opportunities</strong>, assess business value and feasibility, and establish the centralized execution model for <strong>rebuild initiatives</strong></p></article><article class="card" style="--i:4"><h3>BPR for AI</h3><p>Rewire <strong>business and operational processes</strong> across all support functions through AI, so that the new processes are simpler, faster and AI-enabled by design</p></article></div>
+      </div><div class="row t2">
+        <div class="tile" style="--i:5"><span class="num">02</span><span class="tname">AI Readiness</span></div>
+        <div class="cards"><article class="card" style="--i:6"><h3>Modernization &amp; simplification</h3><p><strong>Harmonize</strong> and <strong>simplify</strong> the OEs application and infrastructure landscape, further improve our operating model</p></article><article class="card" style="--i:7"><h3>Operating Model</h3><p><strong>Decide what we do ourselves and what we partner for</strong> to have a resilient and future-fit organization.</p></article><article class="card" style="--i:8"><h3>Software Pruning</h3><p><strong>Reduce software complexity and spend</strong> through license optimization, vendor rationalization, and tool consolidation</p></article></div>
+      </div><div class="row t3">
+        <div class="tile" style="--i:9"><span class="num">03</span><span class="tname">AI Skills</span></div>
+        <div class="cards"><article class="card" style="--i:10"><h3>Right-skilling and right-sizing</h3><p>Turn AI impact into people action: <strong>close the skill gap</strong> - transform workforce capabilities and structure to support the future AI-native operating model</p></article></div>
+      </div>
+      </div>
+      <aside class="partner" style="--i:11">
+        <h3>AI Partnership Model</h3>
+        <p><strong>Transform</strong> how we engage partners, from buying effort to buying outcomes, and capture the value AI creates: reshape and consolidate the existing partner portfolio around new AI partnership archetypes</p>
+      </aside>
     </div>
   </section>
 
@@ -206,7 +216,7 @@ button:focus-visible{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 
 
 <script>
 (function(){
-  // Two independent accordions (house / portfolio); one item open at a time in each.
+  // House: one block open at a time. The portfolio table below is always open.
   function accordion(sel){
     var btns=Array.prototype.slice.call(document.querySelectorAll(sel));
     function set(b,open){
@@ -223,7 +233,6 @@ button:focus-visible{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 
     });
   }
   accordion('.htoggle');
-  accordion('.tile');
 })();
 </script>
 </body>
