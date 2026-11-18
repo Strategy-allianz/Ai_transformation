@@ -12,19 +12,18 @@
 :root{
   --navy:#0F2A5C; --ink:#1F3560; --sky:#2AA3DC;
   --green:#4FC08D; --green-soft:#6FD6A4;
-  --mint:#E3F1EB; --mint-strong:#C9EBDA;
+  --mint:#E6F3EE; --mint-strong:#C9EBDA; --teal-line:#168C80;
   --font:"Allianz Neo","Segoe UI",Arial,sans-serif;
   --ease:cubic-bezier(.16,1,.3,1);
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-html{background:#E7EAF0;min-height:100%}
+html{-webkit-text-size-adjust:100%;background:#E7EAF0;min-height:100%}
 body{margin:0;min-height:100vh;background:transparent;color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased}
 button{font:inherit;color:inherit;cursor:pointer}
 button:focus-visible{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 5px var(--sky)}
 .page{max-width:1000px;margin:0 auto;padding:clamp(12px,3vw,32px)}
 
-/* ---------- house card ---------- */
+/* ---------- 1 + 2: header and house (dark card) ---------- */
 .house-card{
   border-radius:20px;overflow:hidden;color:#fff;padding:clamp(16px,2.6vw,32px);
   background:
@@ -37,8 +36,6 @@ button:focus-visible{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 
 .eyebrow{grid-column:1;grid-row:1;margin:0 0 6px;color:var(--green);font-size:clamp(1.1rem,2.4vw,1.6rem);font-weight:300}
 .logo{grid-column:2;grid-row:1;width:clamp(78px,10vw,104px);height:auto}
 .house-head h1{grid-column:1 / -1;grid-row:2;margin:0;font-weight:300;font-size:clamp(1.1rem,2.7vw,1.8rem);line-height:1.25}
-.instruction{grid-column:1 / -1;grid-row:3;justify-self:start;margin:clamp(10px,1.6vw,16px) 0 0;display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);font-size:clamp(.85rem,1.6vw,1rem);font-weight:700}
-.instruction svg{width:18px;height:18px;flex:none;color:var(--green-soft)}
 
 .banner{border:1px solid rgba(80,170,230,.55);border-radius:12px;background:rgba(40,120,200,.14);padding:clamp(10px,1.6vw,14px)}
 .banner-title{margin:0 0 10px;text-align:center;font-weight:700;color:#35A9E6;font-size:clamp(1.05rem,2.6vw,1.5rem);display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;line-height:1.25}
@@ -46,18 +43,17 @@ button:focus-visible{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 
 .chips{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .chips li{background:linear-gradient(180deg,rgba(32,150,160,.55),rgba(24,110,140,.55));border-radius:8px;padding:10px 6px;text-align:center;font-weight:700;font-size:clamp(.7rem,1.35vw,.9rem);line-height:1.2;display:flex;align-items:center;justify-content:center}
 
-/* ---------- chevron ---------- */
+.cta{margin:clamp(12px,2vw,18px) auto 10px;display:flex;align-items:center;justify-content:center;gap:10px;width:fit-content;max-width:100%;padding:8px 16px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);font-size:clamp(.85rem,1.6vw,1rem);font-weight:700;text-align:center}
+.cta svg{width:18px;height:18px;flex:none;color:var(--green-soft)}
+
 .chev{width:.6em;height:.6em;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);transition:transform .35s var(--ease);flex:none}
 [aria-expanded="true"] .chev{transform:rotate(225deg) translate(-2px,-2px)}
 
-/* ---------- roof ---------- */
-.roof-wrap{margin-top:4px}
 .roof{position:relative;display:block;width:100%;border:0;background:none;padding:0;height:clamp(76px,11vw,104px);color:#fff}
 .roof::before{content:"";position:absolute;inset:0;clip-path:polygon(50% 0,100% 100%,0 100%);background:linear-gradient(180deg,#1E7A9E 0%,#153F73 100%);transition:filter .2s}
 .roof:hover::before,.roof[aria-expanded="true"]::before{filter:brightness(1.2)}
 .roof-label{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;white-space:nowrap;font-weight:700;font-size:clamp(1.05rem,2.3vw,1.4rem)}
 
-/* ---------- pillars ---------- */
 .pillars{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,3vw,34px);margin-top:12px}
 .cap{display:block;height:8px;border-radius:2px;margin:0 -4px}
 .readiness .cap{background:#2A86C8}
@@ -69,46 +65,66 @@ button:focus-visible{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 
 .pillar-btn:hover{background:rgba(255,255,255,.1)}
 .pillar-btn[aria-expanded="true"]{box-shadow:inset 0 0 0 2px rgba(255,255,255,.6)}
 
-/* ---------- collapsible detail panels ---------- */
+.base{width:100%;margin-top:12px;display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;color:#fff;border:1px dashed rgba(140,190,235,.6);border-radius:6px;background:rgba(20,110,140,.45);padding:clamp(12px,2vw,18px) 14px;font-weight:700;font-size:clamp(.95rem,2vw,1.3rem);transition:background .2s}
+.base:hover,.base[aria-expanded="true"]{background:rgba(30,130,165,.6)}
+.base[aria-expanded="true"]{border-style:solid}
+
 .panel{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .45s var(--ease),visibility 0s linear .45s}
 .panel.open{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows .45s var(--ease),visibility 0s}
 .panel-inner{overflow:hidden;min-height:0}
 .d-delivery{--accent:#45B8D6}
 .d-readiness{--accent:#55B4F0}
 .d-skills{--accent:#5FD895}
+.d-base{--accent:#7FB6E0}
 .detail-box{margin-top:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);border-left:4px solid var(--accent);border-radius:12px;padding:clamp(14px,2.2vw,22px)}
-.def{margin:0;font-size:clamp(1.05rem,2.3vw,1.4rem);font-weight:300;line-height:1.3}
-.def strong{font-weight:700}
-.cards-label{margin:18px 0 8px;display:flex;align-items:center;gap:12px;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
-.cards-label::after{content:"";flex:1;height:1px;background:var(--accent);opacity:.45}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:10px}
-.card{background:var(--mint);border-top:3px solid var(--accent);border-radius:4px;padding:14px 14px 16px;font-size:.9rem;line-height:1.45;color:var(--ink)}
+.def{margin:0;font-size:clamp(1rem,2.2vw,1.3rem);font-weight:300;line-height:1.35}
+
+/* ---------- 3: portfolio visual ---------- */
+.portfolio{container-type:inline-size;margin-top:clamp(24px,3.6vw,44px)}
+.portfolio h2{margin:0 0 clamp(12px,2vw,20px);font-weight:300;font-size:clamp(1.5rem,3.2vw,2.3rem);line-height:1.15;color:var(--navy)}
+.row{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin-bottom:10px}
+.tile{display:flex;align-items:center;gap:14px;width:100%;border:0;border-radius:6px;padding:14px 16px;text-align:left;color:#fff;font-weight:700;transition:filter .2s}
+.tile:hover{filter:brightness(1.08)}
+.tile:focus-visible{outline-color:var(--navy)}
+.tile .num{font-size:1.6rem;font-weight:700;line-height:1}
+.tile .tname{font-size:1.1rem;line-height:1.15}
+.tile .chev{margin-left:auto}
+.t1 .tile{background:#1D6F5E}
+.t2 .tile{background:#3E927B}
+.t3 .tile{background:#8FC4AB;color:var(--navy)}
+.rpanel{display:none}
+.row.open .rpanel{display:block;animation:fadein .4s var(--ease)}
+@keyframes fadein{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:8px;height:100%}
+.card{background:var(--mint);border-top:3px solid var(--teal-line);border-radius:2px;padding:14px 14px 16px;font-size:.88rem;line-height:1.45;color:var(--ink)}
 .card h3{margin:0 0 6px;font-size:1.05rem;line-height:1.2;color:var(--navy);font-weight:700}
 .card p{margin:0}
+.card strong{font-weight:700;color:var(--navy)}
+@container (min-width:640px){
+  .row.open{grid-template-columns:112px minmax(0,1fr)}
+  .row.open .tile{flex-direction:column;align-items:flex-start;justify-content:space-between;padding:16px 14px;min-height:130px}
+  .row.open .tile .tname{margin-top:auto}
+  .row.open .tile .chev{margin-left:0;align-self:flex-end}
+}
 
-/* ---------- base ---------- */
-.base{margin-top:12px;display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;line-height:1.25;border:1px dashed rgba(140,190,235,.6);border-radius:6px;background:rgba(20,110,140,.45);padding:clamp(12px,2vw,18px) 14px}
-.base strong{font-size:clamp(.95rem,2vw,1.3rem)}
-.base span{font-weight:300;font-size:clamp(.85rem,1.6vw,1.05rem);color:#D6E4F7}
-
-/* ---------- callout ---------- */
 .callout{margin-top:clamp(22px,3.4vw,40px);display:flex;gap:16px;align-items:center;background:var(--mint-strong);border-radius:12px;padding:clamp(14px,2vw,20px) clamp(14px,2.4vw,24px);color:var(--navy)}
 .callout svg{width:44px;height:44px;flex:none}
 .callout h4{margin:0 0 2px;font-size:.9rem;letter-spacing:.02em;text-transform:uppercase}
 .callout p{margin:0;font-size:.95rem}
 
 @media (max-width:480px){.chips li{padding:8px 4px}.callout svg{display:none}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation:none!important}}
 </style>
 </head>
 <body>
 <main class="page">
+
+  <!-- 1 + 2 -->
   <section class="house-card" aria-labelledby="house-title">
     <header class="house-head">
       <p class="eyebrow">Our strategy</p>
       <img class="logo" alt="Allianz" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjA5LjU0NyIgaGVpZ2h0PSIxNTEuMTgxIiB2aWV3Qm94PSIwIDAgMTQ3NjAgMzY2MSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIG92ZXJmbG93PSJoaWRkZW4iPjxzdHlsZT4KLk1zZnRPZmNUaG1fVGV4dDFfRmlsbF92MiB7CiBmaWxsOiNGRkZGRkY7IAp9Cjwvc3R5bGU+CjxkZWZzPjwvZGVmcz48ZyBpZD0iRWJlbmVfeDAwMjBfMSI+PHBhdGggZD0iTTU4MCAyOTAzIDc1MiAyMzI4IDE0MzEgMjMyOCAxNTkyIDI5MDMgMjIyMSAyOTAzIDE1OTYgNzA4QzE1NjAgNTc5IDE0ODEgNTE5IDEzNDUgNTE5TDQ1NSA1MTkgNDU1IDcyNiA1MzAgNzI2QzYyMyA3MjYgNjczIDc2MiA2NzMgODMzIDY3MyA4ODAgNjYzIDkxOSA2MjYgMTAyNkwwIDI5MDMgNTgwIDI5MDNaTTEzNDUgMTkzOCA4NDEgMTkzOCAxMTA5IDEwNjIgMTM0NSAxOTM4Wk0yOTQ2IDI5MDMgMjk0NiA3MDFDMjk0NiA1ODcgMjg3OCA1MTkgMjc2NyA1MTlMMjIxNyA1MTkgMjIxNyA3MjYgMjI1MyA3MjZDMjM0NiA3MjYgMjM4NSA3NjUgMjM4NSA4NTlMMjM4NSAyOTAzIDI5NDYgMjkwM1pNMzkwMCAyOTAzIDM5MDAgNzAxQzM5MDAgNTg3IDM4MzIgNTE5IDM3MjEgNTE5TDMxNzEgNTE5IDMxNzEgNzI2IDMyMDYgNzI2QzMyOTkgNzI2IDMzMzggNzY1IDMzMzggODU5TDMzMzggMjkwMyAzOTAwIDI5MDNaTTQ4NjggMjkwMyA0ODY4IDEyOThDNDg2OCAxMTg0IDQ4MDAgMTExNiA0Njg5IDExMTZMNDE0NiAxMTE2IDQxNDYgMTMxOSA0MTc4IDEzMTlDNDI3MSAxMzE5IDQzMTAgMTM2MiA0MzEwIDE0NTVMNDMxMCAyOTAzIDQ4NjggMjkwM1pNNDg3OSA3MzZDNDg3OSA1NzYgNDc2MCA0ODAgNDU1NyA0ODAgNDM1NyA0ODAgNDIzNSA1NzYgNDIzNSA3MzYgNDIzNSA4OTggNDM1NyA5OTQgNDU1NyA5OTQgNDc2MCA5OTQgNDg3OSA4OTggNDg3OSA3MzZaTTUzNDIgMTYyN0M1NTI4IDE1MzggNTczMiAxNDg4IDU4OTIgMTQ4OCA2MDQzIDE0ODggNjA5NyAxNTQyIDYwOTcgMTY5OEw2MDk3IDE3MzhDNTg2OCAxNzc0IDU3OTcgMTc4OSA1NjY4IDE4MTcgNTU5MyAxODM0IDU1MjQgMTg1NiA1NDU2IDE4ODUgNTIzMSAxOTc1IDUxMjQgMjE0OSA1MTI0IDI0MTcgNTEyNCAyNzU3IDUyNzEgMjkyMSA1NTc1IDI5MjEgNTY4NSAyOTIxIDU3ODYgMjkwMCA1ODc1IDI4NjQgNTk1NCAyODI5IDYwMDAgMjgwMCA2MTE1IDI3MTFMNjExNSAyNzM2QzYxMTUgMjg0NiA2MTcyIDI5MDMgNjI4MyAyOTAzTDY3OTQgMjkwMyA2Nzk0IDI3MTEgNjc2OSAyNzExQzY2NzIgMjcxMSA2NjM3IDI2NjcgNjYzNyAyNTUzTDY2MzcgMTcwMkM2NjM3IDEyNDggNjQ3OSAxMDkwIDYwMjUgMTA5MCA1ODc5IDEwOTAgNTczNiAxMTA5IDU1OTYgMTE0MSA1NDU2IDExNzMgNTM4NSAxMjAyIDUyMTggMTI4NEw1MzQyIDE2MjdaTTYwOTcgMjA0NSA2MDk3IDIzOTJDNjAwMyAyNDg5IDU4OTAgMjU0NyA1NzkzIDI1NDcgNTY5MyAyNTQ3IDU2NTcgMjQ5NyA1NjU3IDIzNjMgNTY1NyAyMjMxIDU2ODUgMjE3MSA1Nzg2IDIxMzIgNTg2MSAyMDk5IDU5NTcgMjA3MSA2MDk3IDIwNDVaTTc2MDggMjkwMyA3NjA4IDE2OTVDNzcwMSAxNTkxIDc3OTcgMTU0NCA3OTA4IDE1NDQgODAyNyAxNTQ0IDgwNTUgMTU5MSA4MDU1IDE3NzFMODA1NSAyOTAzIDg2MTIgMjkwMyA4NjEyIDE2ODhDODYxMiAxNDA1IDg1OTIgMTMxNiA4NTAyIDEyMjAgODQyNyAxMTM3IDgzMTMgMTA5NSA4MTY1IDEwOTUgNzk0NyAxMDk1IDc3OTQgMTE2MiA3NTg3IDEzNTVMNzU4NyAxMjg0Qzc1ODcgMTE3MyA3NTI5IDExMTYgNzQxNSAxMTE2TDY4ODYgMTExNiA2ODg2IDEzMTkgNjkxOCAxMzE5QzcwMTEgMTMxOSA3MDUwIDEzNjIgNzA1MCAxNDU1TDcwNTAgMjkwMyA3NjA4IDI5MDNaTTEwMjY3IDI1MjggOTQ4OCAyNTI4IDEwMjMxIDE0ODUgMTAyMzEgMTExNiA5MDY2IDExMTZDODkzNCAxMTE2IDg4NzMgMTE3NiA4ODczIDEzMDlMODg3MyAxNjM0IDkwODEgMTYzNCA5MDgxIDE2MDJDOTA4MSAxNTIwIDkxMjMgMTQ4MCA5MjEyIDE0ODBMOTYxMyAxNDgwIDg4NjIgMjUzNSA4ODYyIDI5MDMgMTAyNjcgMjkwMyAxMDI2NyAyNTI4Wk0xNDc2MCAxODI2QzE0NzU4IDc4MiAxMzk3NyAxIDEyOTMyIDBMMTI5MjcgMEMxMTg4MSAxIDExMDk5IDc4NSAxMTA5OSAxODMxIDExMDk5IDI4NzkgMTE4ODIgMzY2MSAxMjkzMCAzNjYxIDEzOTc2IDM2NjEgMTQ3NTggMjg4MSAxNDc2MCAxODM1TDE0NzYwIDE4MjZaTTE0NDQ5IDE4MzFDMTQ0NDkgMjcyMSAxMzgwOSAzMzY4IDEyOTMwIDMzNjggMTIwNTAgMzM2OCAxMTQxMCAyNzIxIDExNDEwIDE4MzEgMTE0MTAgOTQwIDEyMDUwIDI5MyAxMjkzMCAyOTMgMTM4MDkgMjkzIDE0NDQ5IDk0NCAxNDQ0OSAxODMxWk0xMjQzMyAyODU3IDEyNDMzIDEwNjkgMTIxMjIgMTA2OUMxMTk2OCAxMDY5IDExOTA3IDExMjYgMTE5MDcgMTI4NEwxMTkwNyAyODU3IDEyNDMzIDI4NTdaTTEzNDI3IDI4NTcgMTM5NTIgMjg1NyAxMzk1MiAxMjg0QzEzOTUyIDExMjYgMTM4OTEgMTA2OSAxMzczNyAxMDY5TDEzNDI3IDEwNjkgMTM0MjcgMjg1N1pNMTMxOTQgMjg1NyAxMzE5NCA4MzdDMTMxOTQgNjc2IDEzMTM3IDYyMiAxMjk4MCA2MjJMMTI1MDggNjIyIDEyNTA4IDg0OCAxMjUzNiA4NDhDMTI2NDQgODQ4IDEyNjY1IDg3MiAxMjY2NSAxMDAyTDEyNjY1IDI4NTcgMTMxOTQgMjg1N1oiIGNsYXNzPSJmaWwwIE1zZnRPZmNUaG1fVGV4dDFfRmlsbF92MiIgZmlsbD0iI0ZGRkZGRiIgZmlsbC1ydWxlPSJub256ZXJvIi8+PC9nPjwvc3ZnPg==">
       <h1 id="house-title">Four interconnected building blocks that turn AI into Group value</h1>
-      <p class="instruction"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V11m0-.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L4.5 15.5a1.5 1.5 0 0 1 2.4-1.8L9 15.5"/></svg>Click on each building block to know more</p>
     </header>
 
     <div class="banner">
@@ -118,47 +134,65 @@ button:focus-visible{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 
       <ul class="chips"><li>Boosting smart growth</li><li>Reinforcing productivity</li><li>Strengthening Resilience</li></ul>
     </div>
 
-    <div class="roof-wrap">
-      <button class="roof toggle" id="btn-delivery" type="button" aria-expanded="false" aria-controls="panel-delivery">
-        <span class="roof-label">AI Delivery <i class="chev" aria-hidden="true"></i></span>
+    <p class="cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V11m0-.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L4.5 15.5a1.5 1.5 0 0 1 2.4-1.8L9 15.5"/></svg>Click on each building block to know more</p>
+
+    <div class="house">
+      <div class="roof-wrap">
+        <button class="roof htoggle" id="btn-delivery" type="button" aria-expanded="false" aria-controls="panel-delivery">
+          <span class="roof-label">AI Delivery <i class="chev" aria-hidden="true"></i></span>
+        </button>
+        <div class="panel d-delivery" id="panel-delivery" role="region" aria-labelledby="btn-delivery">
+          <div class="panel-inner"><div class="detail-box"><p class="def">Build and run IT with AI by default, through the new AI Factory.</p></div></div>
+        </div>
+      </div>
+
+      <div class="pillars">
+        <div class="pillar readiness">
+          <span class="cap" aria-hidden="true"></span>
+          <div class="p-body"><button class="pillar-btn htoggle" id="btn-readiness" type="button" aria-expanded="false" aria-controls="panel-readiness"><span>AI Readiness</span><i class="chev" aria-hidden="true"></i></button></div>
+          <span class="cap" aria-hidden="true"></span>
+        </div>
+        <div class="pillar skills">
+          <span class="cap" aria-hidden="true"></span>
+          <div class="p-body"><button class="pillar-btn htoggle" id="btn-skills" type="button" aria-expanded="false" aria-controls="panel-skills"><span>AI Skills</span><i class="chev" aria-hidden="true"></i></button></div>
+          <span class="cap" aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="panel d-readiness" id="panel-readiness" role="region" aria-labelledby="btn-readiness">
+          <div class="panel-inner"><div class="detail-box"><p class="def">Simplify and modernize our technology so AI can actually be used.</p></div></div>
+        </div>
+      <div class="panel d-skills" id="panel-skills" role="region" aria-labelledby="btn-skills">
+          <div class="panel-inner"><div class="detail-box"><p class="def">Become a skills-based organization: tech entrepreneurs, deep experts and focus skills.</p></div></div>
+        </div>
+
+      <div class="base-wrap">
+        <button class="base htoggle" id="btn-base" type="button" aria-expanded="false" aria-controls="panel-base">Security &amp; Digital Resilience <i class="chev" aria-hidden="true"></i></button>
+        <div class="panel d-base" id="panel-base" role="region" aria-labelledby="btn-base">
+          <div class="panel-inner"><div class="detail-box"><p class="def">The foundation that makes AI scale acceptable.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="portfolio" aria-labelledby="portfolio-title">
+    <h2 id="portfolio-title">The AI transformation portfolio</h2>
+    <div class="row t1">
+      <button class="tile" id="pbtn-delivery" type="button" aria-expanded="false" aria-controls="ppanel-delivery">
+        <span class="num">01</span><span class="tname">AI Delivery</span><i class="chev" aria-hidden="true"></i>
       </button>
-      <div class="panel d-delivery" id="panel-delivery" role="region" aria-labelledby="btn-delivery">
-          <div class="panel-inner"><div class="detail-box">
-            <p class="def"><strong>AI Delivery</strong> transforms how we build and run solutions.</p>
-            <p class="cards-label">Our Transformation</p>
-            <div class="cards"><article class="card"><h3>AI Ways of Working (AI WoW)</h3><p>AI becomes the default way we deliver and run IT. Agents handle the steps; people steer, decide and approve.</p></article><article class="card"><h3>AI Rebuild</h3><p>Rebuild ageing applications with AI and retire those we no longer need.</p></article><article class="card"><h3>Business Process Rewiring for AI (BPR for AI)</h3><p>AI-native thinking for support functions.</p></article></div>
-          </div></div>
-        </div>
+      <div class="rpanel" id="ppanel-delivery" role="region" aria-labelledby="pbtn-delivery"><div class="cards"><article class="card"><h3>AI WoW</h3><p>Define and scale our <strong>AI-native IT delivery and operations model</strong>, embedding AI into processes, tooling, organization, and workforce structures to drive enterprise-wide adoption</p></article><article class="card"><h3>AI Rebuild</h3><p>Define the framework to identify <strong>AI rebuild opportunities</strong>, assess business value and feasibility, and establish the centralized execution model for <strong>rebuild initiatives</strong></p></article><article class="card"><h3>BPR for AI</h3><p>Rewire <strong>business and operational processes</strong> across all support functions through AI, so that the new processes are simpler, faster and AI-enabled by design</p></article></div></div>
+    </div><div class="row t2">
+      <button class="tile" id="pbtn-readiness" type="button" aria-expanded="false" aria-controls="ppanel-readiness">
+        <span class="num">02</span><span class="tname">AI Readiness</span><i class="chev" aria-hidden="true"></i>
+      </button>
+      <div class="rpanel" id="ppanel-readiness" role="region" aria-labelledby="pbtn-readiness"><div class="cards"><article class="card"><h3>Modernization &amp; simplification</h3><p><strong>Harmonize</strong> and <strong>simplify</strong> the OEs application and infrastructure landscape, further improve our operating model</p></article><article class="card"><h3>Operating Model</h3><p><strong>Decide what we do ourselves and what we partner for</strong> to have a resilient and future-fit organization.</p></article><article class="card"><h3>Software Pruning</h3><p><strong>Reduce software complexity and spend</strong> through license optimization, vendor rationalization, and tool consolidation</p></article></div></div>
+    </div><div class="row t3">
+      <button class="tile" id="pbtn-skills" type="button" aria-expanded="false" aria-controls="ppanel-skills">
+        <span class="num">03</span><span class="tname">AI Skills</span><i class="chev" aria-hidden="true"></i>
+      </button>
+      <div class="rpanel" id="ppanel-skills" role="region" aria-labelledby="pbtn-skills"><div class="cards"><article class="card"><h3>Right-skilling and right-sizing</h3><p>Turn AI impact into people action: <strong>close the skill gap</strong> - transform workforce capabilities and structure to support the future AI-native operating model</p></article></div></div>
     </div>
-
-    <div class="pillars">
-      <div class="pillar readiness">
-        <span class="cap" aria-hidden="true"></span>
-        <div class="p-body"><button class="pillar-btn toggle" id="btn-readiness" type="button" aria-expanded="false" aria-controls="panel-readiness"><span>AI Readiness</span><i class="chev" aria-hidden="true"></i></button></div>
-        <span class="cap" aria-hidden="true"></span>
-      </div>
-      <div class="pillar skills">
-        <span class="cap" aria-hidden="true"></span>
-        <div class="p-body"><button class="pillar-btn toggle" id="btn-skills" type="button" aria-expanded="false" aria-controls="panel-skills"><span>AI Skills</span><i class="chev" aria-hidden="true"></i></button></div>
-        <span class="cap" aria-hidden="true"></span>
-      </div>
-    </div>
-    <div class="panel d-readiness" id="panel-readiness" role="region" aria-labelledby="btn-readiness">
-          <div class="panel-inner"><div class="detail-box">
-            <p class="def"><strong>AI Readiness</strong> creates the foundation for AI at scale.</p>
-            <p class="cards-label">Our Transformation</p>
-            <div class="cards"><article class="card"><h3>Modernization &amp; Simplification</h3><p>Simplify, modernize, optimize: a solid base for everything else.</p></article><article class="card"><h3>Operating Model</h3><p>Using AI to simplify how we work internally, starting with our support functions, so everyday work becomes easier.</p></article><article class="card"><h3>Software Pruning</h3><p>Clear out unused licenses and overlapping tools, then reinvest the savings.</p></article></div>
-          </div></div>
-        </div>
-    <div class="panel d-skills" id="panel-skills" role="region" aria-labelledby="btn-skills">
-          <div class="panel-inner"><div class="detail-box">
-            <p class="def"><strong>AI Skills</strong> prepares our workforce for new ways of working.</p>
-            <p class="cards-label">Our Transformation</p>
-            <div class="cards"><article class="card"><h3>Right-skilling &amp; Right-sizing</h3><p>Close the skill gap with learning, coaching and mobility, and shape our workforce responsibly.</p></article></div>
-          </div></div>
-        </div>
-
-    <div class="base"><strong>Security and Digital Resilience</strong><span>is the foundation of it all.</span></div>
   </section>
 
   <aside class="callout" aria-label="Steering principle">
@@ -172,18 +206,24 @@ button:focus-visible{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 
 
 <script>
 (function(){
-  var btns=Array.prototype.slice.call(document.querySelectorAll('.toggle'));
-  function set(b,open){
-    b.setAttribute('aria-expanded',open?'true':'false');
-    document.getElementById(b.getAttribute('aria-controls')).classList.toggle('open',open);
-  }
-  btns.forEach(function(b){
-    b.addEventListener('click',function(){
-      var willOpen=b.getAttribute('aria-expanded')!=='true';
-      // one block open at a time: opening one closes the others
-      btns.forEach(function(x){set(x,x===b&&willOpen)});
+  // Two independent accordions (house / portfolio); one item open at a time in each.
+  function accordion(sel){
+    var btns=Array.prototype.slice.call(document.querySelectorAll(sel));
+    function set(b,open){
+      b.setAttribute('aria-expanded',open?'true':'false');
+      var p=document.getElementById(b.getAttribute('aria-controls'));
+      p.classList.toggle('open',open);
+      var row=b.closest('.row');if(row)row.classList.toggle('open',open);
+    }
+    btns.forEach(function(b){
+      b.addEventListener('click',function(){
+        var willOpen=b.getAttribute('aria-expanded')!=='true';
+        btns.forEach(function(x){set(x,x===b&&willOpen)});
+      });
     });
-  });
+  }
+  accordion('.htoggle');
+  accordion('.tile');
 })();
 </script>
 </body>
